@@ -1,0 +1,11 @@
+Sys.setenv(JAVA_HOME='/usr/jdk1.8.0_31')
+#Sys.setenv(PATH='/usr/lib/rstudio-server/bin')
+Sys.setenv(HADOOP_HOME='/usr/hadoop-2.6.3')
+Sys.setenv(HADOOP_CONF_DIR='/etc/hadoop')
+Sys.setenv (SPARK_DIST_CLASSPATH='/usr/hadoop-2.6.3/bin/hadoop')
+Sys.setenv(SPARK_HOME='/usr/spark-1.6.1')
+library(SparkR, lib.loc = c(file.path(Sys.getenv('SPARK_HOME'), 'R', 'lib')))
+
+sc <- sparkR.init(master='spark://master:7077', sparkEnvir = list(spark.driver.cores='36'))
+
+sqlContext <- sparkRSQL.init(sc)

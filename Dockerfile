@@ -1,7 +1,7 @@
 ## Start with the official rocker image providing 'base R'
 FROM r-base:latest
-## This handle reaches Carl and Dirk
-MAINTAINER "Carl Boettiger and Dirk Eddelbuettel" rocker-maintainers@eddelbuettel.com
+## Based in the Dockerfile of gettyimages/spark and rocker/rstudio
+MAINTAINER "Fernando Pérez" 
 
 ## Add RStudio binaries to PATH
 ENV PATH /usr/lib/rstudio-server/bin/:$PATH
@@ -38,7 +38,7 @@ RUN rm -rf /var/lib/apt/lists/ \
 
 ## Ensure that if both httr and httpuv are installed downstream, oauth 2.0 flows still work correctly.
 RUN echo '\n\
-\n# Configure httr to perform out-of-band authentication if HTTR_LOCALHOST \
+\n# Configure httr to perform out-of-band auGuardar los cambios realizados en el índicethentication if HTTR_LOCALHOST \
 \n# is not set since a redirect to localhost may not work depending upon \
 \n# where this Docker container is running. \
 \nif(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) { \
@@ -118,7 +118,7 @@ RUN curl -sL --retry 3 \
 
 # SPARK
 ENV SPARK_VERSION 1.6.1
-ENV SPARK_PACKAGE spark-$SPARK_VERSION-bin-without-hadoop
+ENV SPARK_PACKAGE spark-$SPARK_VERSION-bin-hadoop2.6
 ENV SPARK_HOME /usr/spark-$SPARK_VERSION
 ENV PYSPARK_PYTHON python3
 ENV SPARK_DIST_CLASSPATH="$HADOOP_HOME/etc/hadoop/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*"
