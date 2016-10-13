@@ -95,7 +95,7 @@ ENV PYTHONHASHSEED 0
 ENV PYTHONIOENCODING UTF-8
 
 # JAVA
-ENV JAVA_HOME /usr/jdk1.8.0_31
+ENV JAVA_HOME /usr/jdk1.${JAVA_MAJOR_VERSION}.0_${JAVA_UPDATE_VERSION}
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN curl -sL --retry 3 --insecure \
   --header "Cookie: oraclelicense=accept-securebackup-cookie;" \
@@ -106,7 +106,7 @@ RUN curl -sL --retry 3 --insecure \
   && rm -rf $JAVA_HOME/man
 
 # HADOOP
-ENV HADOOP_VERSION 2.6.3
+ENV HADOOP_VERSION 2.7.2
 ENV HADOOP_HOME /usr/hadoop-$HADOOP_VERSION
 ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 ENV PATH $PATH:$HADOOP_HOME/bin
@@ -117,7 +117,7 @@ RUN curl -sL --retry 3 \
  && rm -rf $HADOOP_HOME/share/doc
 
 # SPARK
-ENV SPARK_VERSION 1.6.1
+ENV SPARK_VERSION 2.0.1
 ENV SPARK_PACKAGE spark-$SPARK_VERSION-bin-hadoop2.6
 ENV SPARK_HOME /usr/spark-$SPARK_VERSION
 ENV PYSPARK_PYTHON python3
